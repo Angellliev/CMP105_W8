@@ -1,9 +1,11 @@
 #pragma once
-
 #include <SFML/Graphics.hpp>
 #include "Framework/Input.h"
 #include <string>
 #include <iostream>
+#include "BeachBall.h"
+#include "Framework/Collision.h"
+#include "Paddle.h"
 
 
 class Level{
@@ -23,4 +25,12 @@ private:
 	// Default variables for level class.
 	sf::RenderWindow* window;
 	Input* input;
+
+	Collision collision;
+
+	BeachBall beachBall;
+	
+	
+	Paddle playerOne;
+	Paddle playerTwo;
 };

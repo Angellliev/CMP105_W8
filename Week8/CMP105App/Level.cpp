@@ -6,7 +6,11 @@ Level::Level(sf::RenderWindow* hwnd, Input* in)
 	input = in;
 
 	// initialise game objects
+	
+	playerOne.setPosition(20, window->getSize().y / 2 - playerOne.getSize().y / 2);
+	playerTwo.setPosition(window->getSize().x - 80, window->getSize().y / 2 - playerOne.getSize().y / 2);
 
+	beachBall.setPosition(100,200);
 }
 
 Level::~Level()
@@ -24,13 +28,27 @@ void Level::handleInput(float dt)
 void Level::update(float dt)
 {
 	
+	playerOne.update(dt, window);
+	beachBall.update(dt, window);
+	
+
+	if (collision.checkBoundingBox(&beachBall, &playerOne))
+	{
+		beachBall.invertSpeed();
+	}
+	else if (collision.checkBoundingBox(&beachBall, &playerTwo))
+	{
+		beachBall.invertSpeed();
+	}
 }
 
 // Render level
 void Level::render()
 {
 	beginDraw();
-
+	window->draw(beachBall);
+	window->draw(playerOne);
+	
 	endDraw();
 }
 
